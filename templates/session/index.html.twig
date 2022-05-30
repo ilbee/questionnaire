@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SessionController!{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="col-sm-8 mx-auto">
+            {% if session %}
+                <h1>Bah alors ?</h1>
+                <p>
+                    Vous avez déjà une session en cours...
+                </p>
+                <a href="{{ path('app_session_show', {'session': session.id}) }}" class="btn btn-primary">
+                    <i class="fa-solid fa-pause"></i>
+                    Reprendre la session
+                </a>
+                <a href="{{ path('app_session_stop', {'session': session.id}) }}" class="btn btn-danger">
+                    <i class="fa-solid fa-times"></i>
+                    Abandonner la session
+                </a>
+            {% else %}
+                <h1>C'est parti !</h1>
+                <p>
+                    Tout est prêt pour le début de votre aventure ?
+                    <br>
+                    Alors, c'est parti !
+                </p>
+                <a href="{{ path('app_session_start') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-play"></i>
+                    Démarrer une session
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if allSessions is not empty %}
+        <div class="jumbotron mt-2">
+            <div class="col-sm-8 mx-auto">
+                <h1>Mes résultats</h1>
+                <p>
+                    Voici les résultats de vos sessions précédentes.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Session</th>
+                            <th>Date</th>
+                            <th>Durée</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in allSessions %}
+                            <tr>
+                                <td>{{ session.id }}</td>
+                                <td>{{ session.createdAt|date('d/m/Y H:i:s') }}</td>
+                                <td>{{ session.duration }} secondes</td>
+                                <td>{{ session.score }}</td>
+                            </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

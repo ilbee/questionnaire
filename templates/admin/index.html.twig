@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin home{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_admin_user_new') }}">Nouvel utilisateur</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_user_edit', {'user': user.id}) }}">Editer</a>
+                         |
+                        <a href="{{ path('app_admin_user_delete', {'user': user.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

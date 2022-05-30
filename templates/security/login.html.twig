@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="d-none d-lg-block login-background"></div>
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4">Connexion</h3>
+                            </div>
+                        </div>
+                        {% if error %}
+                            <div class="d-flex justify-content-center alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <form method="post" class="signin-form">
+                            <div class="form-group mb-3">
+                                <label class="label" for="inputEmail">Adresse mail</label>
+                                <input type="email" value="{{ last_username }}" placeholder="Adresse mail" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="inputPassword">Mot de passe</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    Se connecter
+                                </button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-100 text-md-right">
+                                    <a href="{{ path('app_user_password-forgotten') }}">Mot de passe oublié ?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

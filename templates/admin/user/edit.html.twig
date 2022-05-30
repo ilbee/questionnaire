@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if user.id %}
+        Modifier un utilisateur
+    {% else %}
+        Créer un utilisateur
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <h1>
+        {% if user.id %}
+            Modifier un utilisateur
+        {% else %}
+            Créer un utilisateur
+        {% endif %}
+    </h1>
+
+    {{ form_start(form) }}*
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        {% if user.id %}
+            <input type="checkbox" name="generateNewPassword" id="generateNewPassword" value="1" >
+            <label for="generateNewPassword">Générer un nouveau mot de passe</label>
+        {% endif %}
+        <button type="submit">Valider</button>
+    {{ form_end(form) }}
+{% endblock %}

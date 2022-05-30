@@ -1,0 +1,18 @@
+
+// customize some Bootstrap variables
+$primary: darken(#428bca, 20%);
+
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap";
+
+.login-wrap {
+  width: 60%
+}
+
+.login-background {
+  width: 35%;
+  height: 80vh;
+  background: url("../img/shahadat-rahman-gnyA8vd3Otc-unsplash.jpg") top center;
+  background-size: cover;
+  position: relative;
+}

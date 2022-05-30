@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const GoogleFontsPlugin = require("@beyonk/google-fonts-webpack-plugin");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -7,6 +8,11 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
+    .copyFiles([{
+        from: './assets/img',
+        to: 'images/[path][name].[hash:8].[ext]',
+        pattern: /.(png|jpg|jpeg|svg|gif)$/
+    }])
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
@@ -21,6 +27,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('timer', './assets/timer.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -56,7 +63,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -70,6 +77,56 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+    .addPlugin(new GoogleFontsPlugin({
+        fonts: [
+            {
+                family: 'Open Sans',
+                variants: [
+                    '300',
+                    '300i',
+                    '400',
+                    '400i',
+                    '600',
+                    '600i',
+                    '700',
+                    '700i',
+                ],
+                subsets: [ 'latin-ext' ],
+            },
+            {
+                family: 'Raleway',
+                variants: [
+                    '300',
+                    '300i',
+                    '400',
+                    '400i',
+                    '500',
+                    '500i',
+                    '600',
+                    '600i',
+                    '700',
+                    '700i',
+                ],
+                subsets: [ 'latin-ext' ],
+            },
+            {
+                family: 'Poppins',
+                variants: [
+                    '300',
+                    '300i',
+                    '400',
+                    '400i',
+                    '500',
+                    '500i',
+                    '600',
+                    '600i',
+                    '700',
+                    '700i',
+                ],
+                subsets: [ 'latin-ext' ],
+            },
+        ]
+    }))
 ;
 
 module.exports = Encore.getWebpackConfig();
