@@ -89,7 +89,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/user/password-forgotten", name="app_user_password-forgotten")
+     * @Route("/password-forgotten", name="app_user_password-forgotten")
      */
     public function forgotten(MailerInterface $mailer, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
